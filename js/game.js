@@ -6,6 +6,14 @@ var target = new Target(20, 20);
 var test = new Enemy(600, 400, 20, 20);
 test.assignTarget(target);
 
+var keysDown = {};
+window.addEventListener('keydown', function(e) {
+    keysDown[e.keyCode] = true;
+});
+window.addEventListener('keyup', function(e) {
+    delete keysDown[e.keyCode];
+});
+
 var main = function(){
 	var now = Date.now();
 	var delta = now - then;
@@ -20,6 +28,7 @@ var main = function(){
 
 var update = function(delta){
 	test.update(delta);
+	target.update(delta);
 };
 
 var clearScreen = function(){
