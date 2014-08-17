@@ -40,8 +40,8 @@ Enemy.prototype.update = function(delta) {
 		}//Move away from player
 		else if (toPlayerLength < 45){
 			this.angle = Math.atan2(toPlayerY, toPlayerX)+Math.PI;
-			this.x -= toPlayerX * this.speed;
-			this.y -= toPlayerY * this.speed;
+			this.x -= toPlayerX * this.speed * 2;
+			this.y -= toPlayerY * this.speed * 2;
 			//approach = true;
 
 		}//orbit
