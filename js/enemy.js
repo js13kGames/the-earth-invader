@@ -6,7 +6,6 @@ Enemy = function(x, y, width, height){
 	this.cx = x + (this.width / 2);
 	this.cy = y + (this.height / 2);
 	this.speed = 3;
-
 	this.rotation = 0;
 };
 
@@ -20,22 +19,39 @@ Enemy.prototype.update = function(delta) {
 		this.targetY = this.target.y;
 
 		// Calculate direction towards player
-		toPlayerX = this.targetX - this.x;
-		toPlayerY = this.targetY - this.y;
+		var toPlayerX = this.targetX - this.x;
+		var toPlayerY = this.targetY - this.y;
 
 		// Normalize
-		toPlayerLength = Math.sqrt(toPlayerX * toPlayerX + toPlayerY * toPlayerY);
+		var toPlayerLength = Math.sqrt(toPlayerX * toPlayerX + toPlayerY * toPlayerY);
 		toPlayerX = toPlayerX / toPlayerLength;
 		toPlayerY = toPlayerY / toPlayerLength;
 
+		this.rotation = Math.atan2(toPlayerY, toPlayerX);
 
 		//Move towards the player
-		if (! (toPlayerLength <= 50)){
+		if (toPlayerLength > 55){
+			this.angle = Math.acos((this.x-this.target.x)/toPlayerLength);
 			this.x += toPlayerX * this.speed;
 			this.y += toPlayerY * this.speed;
 
-			this.rotation = Math.atan2(toPlayerY, toPlayerX);
+		}//Move away from player
+		else if (toPlayerLength < 45){
+			this.angle = Math.acos((this.x-this.target.x)/toPlayerLength);
+			this.x -= toPlayerX * this.speed;
+			this.y -= toPlayerY * this.speed;
+
+		}//orbit
+		else{
+			this.angle -= Math.acos(1-Math.pow(3/toPlayerLength,2)/2);
+
+			this.x = ((toPlayerLength * Math.cos(this.angle)) + (this.target.x));
+			this.y = ((toPlayerLength * Math.sin(this.angle)) + (this.target.y));
+			
+			
 		}
+
+		console.log(this.angle);
 	}
 };
 

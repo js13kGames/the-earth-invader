@@ -1,6 +1,8 @@
 Target = function(x, y){
 	this.x = x;
 	this.y = y;
+    this.width = 20;
+    this.height = 20;
 	this.speed = 500;
 };
 
@@ -23,6 +25,6 @@ Target.prototype.update = function(delta) {
 Target.prototype.render = function() {
 	gctx.beginPath();
 	gctx.fillStyle = "green";
-	gctx.fillRect(this.x, this.y, 20, 20);
+	gctx.fillRect(this.x, this.y, this.width, this.height);
 	gctx.stroke();
 };
