@@ -32,34 +32,25 @@ Enemy.prototype.update = function(delta) {
 		var approach = true; // tracks if enemy is currently approaching player
 		//Move towards the player
 		if (toPlayerLength > 55){
-			this.angle = Math.acos((this.x-this.target.x)/toPlayerLength);
+			this.angle = Math.atan2(toPlayerY,toPlayerX)+Math.PI;
 			this.x += toPlayerX * this.speed;
 			this.y += toPlayerY * this.speed;
-			approach = true;
+			//approach = true;
 
 		}//Move away from player
 		else if (toPlayerLength < 45){
-			this.angle = Math.acos((this.x-this.target.x)/toPlayerLength);
+			this.angle = Math.atan2(toPlayerY, toPlayerX)+Math.PI;
 			this.x -= toPlayerX * this.speed;
 			this.y -= toPlayerY * this.speed;
-			approach = true;
+			//approach = true;
 
 		}//orbit
 		else{
-			this.angle -= 0.01;//Math.acos(1-Math.pow(3/toPlayerLength,2)/2);
+			this.angle -= 0.02;//Math.acos(1-Math.pow(3/toPlayerLength,2)/2);
 
 			this.x = ((toPlayerLength * Math.cos(this.angle)) + (this.target.x));
 
-			if (this.y < this.target.y && approach) {
-				this.y = ((toPlayerLength * -1*Math.sin(this.angle)) + (this.target.y));
-				approach = false;
-			}
-			else {
-				this.y = ((toPlayerLength * Math.sin(this.angle)) + (this.target.y));
-				approach = false;			
-			}
-
-			
+			this.y = ((toPlayerLength * Math.sin(this.angle)) + (this.target.y));
 			
 		}
 
