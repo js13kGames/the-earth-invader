@@ -11,8 +11,6 @@ gc.addEventListener("mousemove", function (evt) {
 	var rect = gc.getBoundingClientRect(); //get bounding rectangle
 	mouseX = evt.clientX - rect.left;
 	mouseY = evt.clientY - rect.top; //clientX & Y are for whole window, left and top are offsets
-	//console.log(x + " " + y);
-	//turret.update();
 });
 
 window.addEventListener('keydown', function(e) {
