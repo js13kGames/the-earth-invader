@@ -1,14 +1,16 @@
 
 Turret = function (x,y) {
-	this.x = x; 
+	this.x = x;
 	this.y = y;
+	this.width = 20;
+	this.height = 10;
 	this.speed = 200;
 	this.health = 1000; //balance parameter
 	this.direction = 0; //radians
 
 	this.updateArray = [0,0,0]; //x, y, health - all need to be done externally, event-based. Will only be set to non-0 if collision or appropriate keypress occurs
 
-}
+};
 
 Turret.prototype.update = function (delta) { //call this to update properties and draw
 	//console.log(this.updateArray);
@@ -45,20 +47,20 @@ Turret.prototype.update = function (delta) { //call this to update properties an
 
 	//at end, clear updateArray
 	this.updateArray = [0,0,0];
-}
+};
 
-Turret.prototype.draw = function (x, y, dir) { 
+Turret.prototype.draw = function () {
 	gctx.save(); //save the state to stack before rotating
-	gctx.fillStyle = "#000000";		
-	gctx.translate(x,y);
-	gctx.rotate(dir);
+	gctx.fillStyle = "#000000";
+	gctx.translate(this.x + this.width / 2, this.y + this.height / 2);
+	gctx.rotate(this.direction);
 	gctx.beginPath();
-	gctx.fillRect(-10,-5,20,10);
+	gctx.fillRect(this.x - (this.x + this.width / 2),this.y - (this.y + this.height / 2),this.width,this.height);
 	gctx.fillStyle = "#FF0000";
-	gctx.fillRect(-15,-1,10,2);
+	gctx.fillRect(this.x - 5 - (this.x + this.width / 2),this.y  + 4 - (this.y + this.height / 2),10,2);
 	gctx.closePath();
 	gctx.restore(); //restore back to original
-}
+};
 
 Turret.prototype.findDirection = function (mX,mY) {
 	var distanceX = this.x - mX;
@@ -67,5 +69,5 @@ Turret.prototype.findDirection = function (mX,mY) {
 	//console.log(newDir*180/Math.PI - this.direction);
 	var dDir = newDir - this.direction; //delta in direction
 	return dDir;
-}
+};
 

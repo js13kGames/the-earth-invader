@@ -35,8 +35,8 @@ var clearScreen = function(){
 var render = function(){
 	clearScreen();
 
-	test.render();
-	target.draw(target.x,target.y,target.direction);
+	test.draw();
+	target.draw();
 };
 
 var then = Date.now();

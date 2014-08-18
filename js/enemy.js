@@ -58,7 +58,7 @@ Enemy.prototype.update = function(delta) {
 	}
 };
 
-Enemy.prototype.render = function() {
+Enemy.prototype.draw = function() {
 	gctx.save();
 	gctx.translate(this.x + this.width / 2, this.y + this.height / 2);
     gctx.rotate(this.rotation);
