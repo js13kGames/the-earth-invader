@@ -1,18 +1,12 @@
 gc = document.getElementById("game");
 gctx = gc.getContext("2d");
 
-var target = new Target(20, 20);
+var target = new Turret(200, 200);
 
 var test = new Enemy(600, 400, 20, 20);
 test.assignTarget(target);
 
-var keysDown = {};
-window.addEventListener('keydown', function(e) {
-    keysDown[e.keyCode] = true;
-});
-window.addEventListener('keyup', function(e) {
-    delete keysDown[e.keyCode];
-});
+initEventHandlers();
 
 var main = function(){
 	var now = Date.now();
@@ -42,7 +36,7 @@ var render = function(){
 	clearScreen();
 
 	test.render();
-	target.render();
+	target.draw(target.x,target.y,target.direction);
 };
 
 var then = Date.now();

@@ -54,7 +54,7 @@ Enemy.prototype.update = function(delta) {
 			
 		}
 
-		console.log(this.angle);
+		//console.log(this.angle);
 	}
 };
 
